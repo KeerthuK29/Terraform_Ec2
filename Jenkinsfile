@@ -2,7 +2,7 @@
 pipeline {
 
     parameters {
-        string(name: 'environment', defaultValue: 'terraform_project_4', description: 'Workspace/environment file to use for deployment')
+        string(name: 'environment', defaultValue: 'terraform_project_5', description: 'Worklocation/environment file to use for deployment')
         booleanParam(name: 'autoApprove', defaultValue: false, description: 'Automatically run apply after generating plan?')
 
     }
@@ -47,7 +47,7 @@ pipeline {
 
            steps {
                script {
-                   def plan = readFile 'Terrafrom_1/tfplan'
+                   def plan = readFile 'terraform/tfplan'
                     input message: "Do you want to apply the plan?",
                     parameters: [text(name: 'Plan', description: 'Please review the plan', defaultValue: plan)]
                 }
