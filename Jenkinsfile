@@ -12,7 +12,7 @@ environment {
         stage('checkout') {
             steps {
                  script{
-                        dir("terraform")
+                        dir("Terraform")
                         {
                            git branch:'main',url:'https://github.com/KeerthuK29/Terraform_Ec2.git'
                         }
