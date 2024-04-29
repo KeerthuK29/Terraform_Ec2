@@ -1,14 +1,6 @@
 
 pipeline {
-
-    parameters {
-        string(name: 'environment', defaultValue: 'terraform_project_5', description: 'Worklocation/environment file to use for deployment')
-        booleanParam(name: 'autoApprove', defaultValue: false, description: 'Automatically run apply after generating plan?')
-
-    }
-
-
-     environment {
+environment {
          AWS_ACCESS_KEY_ID     = credentials('aws-access-key-id')
         AWS_SECRET_ACCESS_KEY = credentials('aws-secret-access-key')
     }
@@ -28,39 +20,16 @@ pipeline {
                 }
             }
 
-        stage('Plan') {
+        stage('Run') {
             steps {
-                sh 'terraform init -input=false'
-                sh 'terraform workspace new ${environment}'
-                sh ' terraform workspace select ${environment}'
-                sh 'terraform plan -out=tfplan'
-                sh'terraform show -no-color tfplan > tfplan.txt'
-               
-            }
-        }
-        stage('Approval') {
-           when {
-               not {
-                   equals expected: true, actual: params.autoApprove
-               }
-           }
-
-           steps {
-               script {
-                   def plan = readFile 'terraform/tfplan'
-                    input message: "Do you want to apply the plan?",
-                    parameters: [text(name: 'Plan', description: 'Please review the plan', defaultValue: plan)]
-                }
-                   
+                sh 'terraform init'
+                sh 'terraform plan'
+                sh 'terrafrom apply -auto-approve'
+                 
                }
            }
        
 
-        stage('Apply') {
-            steps {
-                sh " terraform apply -input=false tfplan"
-            }
-        }
     }
 
   }
