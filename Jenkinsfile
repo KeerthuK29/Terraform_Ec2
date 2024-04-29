@@ -54,7 +54,7 @@ pipeline {
 
         stage('Apply') {
             steps {
-                sh "pwd;cd terraform/aws-instance-first-script ; terraform apply -input=false tfplan"
+                sh " terraform apply -input=false tfplan"
             }
         }
     }
