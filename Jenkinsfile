@@ -24,7 +24,7 @@ environment {
             steps {
                 sh 'terraform init'
                 sh 'terraform plan'
-                sh 'terrafrom apply -auto-approve'
+                sh 'terraform apply -auto-approve'
                  
                }
            }
