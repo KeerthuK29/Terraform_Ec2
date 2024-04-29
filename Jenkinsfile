@@ -46,7 +46,7 @@ pipeline {
 
            steps {
                script {
-                   def plan = readFile 'Terraform_1/tfplan'
+                   def plan = readFile 'Terrafrom_1/tfplan'
                     input message: "Do you want to apply the plan?",
                     parameters: [text(name: 'Plan', description: 'Please review the plan', defaultValue: plan)]
                 }
