@@ -3,7 +3,7 @@ variable "region" {
 }
 
 variable "ami_id" {
-  type = map(String)
+  type = map(string)
 
   default=
   {
