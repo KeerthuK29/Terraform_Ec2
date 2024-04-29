@@ -34,6 +34,7 @@ pipeline {
                 sh 'terraform workspace new ${environment}'
                 sh ' terraform workspace select ${environment}'
                 sh 'terraform plan -out=tfplan'
+                sh'terraform show -no-color tfplan > tfplan.txt'
                
             }
         }
